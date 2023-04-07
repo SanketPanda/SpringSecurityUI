@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="row">
+    <div class="container mt-4 mb-5">
+      <div class="signup-container m-auto">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title class="card-heading">Edit profile</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <form [formGroup]="editForm" (ngSubmit)="onFormSubmit()">
+              <div class="errorMsg">
+                <label for="errorMsg"><b>{{errorMsg}}</b></label>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <label for="firstName"><b>First name</b></label>
+                  <input type="text" name="userId" id="userId" class="form-control" formControlName="userId"
+                    ngDefaultControl hidden>
+                  <input type="text" placeholder="Enter first name" name="firstName" id="firstName"
+                    class="form-control" formControlName="firstName" required ngDefaultControl>
+                  <app-field-error [displayError]="isFieldValid('firstName')" [errorMsg]="getErrorMessage('firstName')">
+                  </app-field-error>
+                </div>
+                <div class="col">
+                  <label for="lastName"><b>Last name</b></label>
+                  <input type="text" placeholder="Enter last name" name="lastName" id="lastName"
+                    class="form-control" formControlName="lastName" required ngDefaultControl>
+                  <app-field-error [displayError]="isFieldValid('lastName')" [errorMsg]="getErrorMessage('lastName')">
+                  </app-field-error>
+                </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <label for="email"><b>Email</b></label>
+                    <input type="email" placeholder="Enter email" name="email" id="email" class="form-control"
+                      formControlName="email" required ngDefaultControl>
+                    <app-field-error [displayError]="isFieldValid('email')" [errorMsg]="getErrorMessage('email')">
+                    </app-field-error>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <label for="password"><b>Password</b></label>
+                    <input type="password" placeholder="Enter password" name="password" id="password" class="form-control"
+                      formControlName="password" required ngDefaultControl>
+                    <app-field-error [displayError]="isFieldValid('password')" [errorMsg]="getErrorMessage('password')">
+                    </app-field-error>
+                  </div>
+                </div>
+              <button type="submit" class="btn btn-primary registerbtn mt-4"
+                >Update</button>
+            </form>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<mat-toolbar>
+  <a class="navbar-brand heading" routerLink="/"><span>Spring Security - Signup/Login</span></a>
+  <span class="example-spacer"></span>
+  <div class="btns-container">
+  <button mat-raised-button color="primary" class="mr-3" routerLink="/login" *ngIf="!isUserLoggedIn()">Login</button>
+  <button mat-raised-button color="accent" routerLink="/signup" *ngIf="!isUserLoggedIn()">Signup</button>
+  <button  mat-button color="primary" class="mr-3" routerLink="/profile" *ngIf="isUserLoggedIn()">Profile</button>
+  <button  mat-button color="primary" class="mr-3" routerLink="/dashboard" *ngIf="isUserLoggedIn()">Dashboard</button>
+  <button  mat-button color="accent" (click)="logout()" *ngIf="isUserLoggedIn()">Logout</button>
+  </div>
+</mat-toolbar>

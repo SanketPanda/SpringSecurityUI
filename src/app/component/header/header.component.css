@@ -1,0 +1,16 @@
+.menu{
+  display: flex;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+.mat-toolbar {
+  background: black;
+  color: #fff;
+}
+button:focus { outline: none; }
+
+.heading{
+  color: white;
+}
