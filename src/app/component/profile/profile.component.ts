@@ -4,21 +4,26 @@ import { environment } from 'src/app/environments/environment';
 import { HttpServiceService } from 'src/app/service/http-service.service';
 import { LoginService } from '../login/service/loginService.service';
 import { registerUserDTO } from 'src/app/model/register.model';
+import { ObjectUtils } from 'src/app/helper/object-utils';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent {
   public editForm!: FormGroup;
   errorMsg!: String;
+  canEditUser!: boolean;
 
   constructor(
     private httpService: HttpServiceService,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private router: Router
   ){
     this.initializeFormValues();
+    this.errorMsg = '';
   }
 
   ngOnInit(): void {
@@ -37,23 +42,41 @@ export class ProfileComponent {
       ]),
       email: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl(null, [
-        Validators.required,
-        Validators.maxLength(15),
-        Validators.pattern(
-          '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{8,15}'
-        ),
+        Validators.required
       ])
     });
   }
 
-  onFormSubmit(){
-    this.httpService.post(environment.users+'/update', this.editForm.value).subscribe((data: registerUserDTO)=>{
+  onEdit(){
+    this.canEditUser = true;
+  }
+
+  onCancel(){
+    this.initializeFormValues();
+    this.canEditUser = false;
+  }
+
+  updateUser(){
+    this.errorMsg = '';
+    this.httpService.put(environment.users+'/update', this.editForm.value).subscribe((data: registerUserDTO)=>{
       console.log('data updated');
       console.log(data);
+      this.initializeFormValues();
+      this.canEditUser = false;
     },
     (error) => {
-      console.log('Error occured - ' + JSON.stringify(error));
-      alert(error.error.errorMessage);
+      const errorList = ObjectUtils.getKeyValuePair(error.error);
+      if(errorList){
+        console.log(errorList);
+        errorList.forEach(error => {
+          if(error.key != 'errorCode')
+            if(error.key == 'errorMessage')
+            this.errorMsg += error.value + '\n';
+            else this.errorMsg += error.key + '-' + error.value + '\n';
+        })
+        return;
+      }
+      this.errorMsg = JSON.stringify(error);
     }
     )
   }
@@ -68,6 +91,7 @@ export class ProfileComponent {
         this.editForm.controls['email'].setValue(data.email);
         this.editForm.controls['password'].setValue(data.password);
       });
+      this.canEditUser = false;
   }
 
   isFieldValid(field: string) {

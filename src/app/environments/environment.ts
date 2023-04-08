@@ -2,8 +2,13 @@ export const environment = {
     production: true,
     baseUrl: 'https://ems-api-j5v3.onrender.com/api',
     baseUrlDev: 'http://localhost:8000/api',
-    signUp: 'register',
-    login: 'login',
-    confirmAccount: 'confirm-account',
-    users: 'user'
+    signUp: '/auth/register',
+    confirmAccount: '/auth/confirm-account',
+    resendVerificationToken:'/auth/verification-token',
+    resetPasswordToken: '/auth/reset-password',
+    resetPassword: '/auth/reset-password/token',
+    forgetPasswordToken: '/auth/forget-password',
+    forgetPassword: '/auth/forget-password/token',
+    login: '/auth/login',
+    users: '/user'
 }

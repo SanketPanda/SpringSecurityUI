@@ -6,13 +6,21 @@ import { SignupComponent } from './component/signup/signup.component';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { ProfileComponent } from './component/profile/profile.component';
 import { IdentifyUserComponent } from './component/identify-user/identify-user.component';
+import { AuthGuard } from './helper/auth-guard';
+import { UserListComponent } from './component/user-list/user-list.component';
+import { ResetPasswordComponent } from './component/reset-password/reset-password.component';
+import { ForgetPasswordComponent } from './component/forget-password/forget-password.component';
 
 const routes: Routes = [
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'profile', component: ProfileComponent },
-  { path: 'signup', component: SignupComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'identify-user', component: IdentifyUserComponent },
+  { path: 'user-list', component: UserListComponent, canActivate: [AuthGuard]},
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
+  { path: '', component: DashboardComponent},
+  { path: 'dashboard', component: DashboardComponent},
+  { path: 'signup', component: SignupComponent},
+  { path: 'login', component: LoginComponent},
+  { path: 'identify-user', component: IdentifyUserComponent},
+  { path: 'reset-password', component: ResetPasswordComponent, canActivate: [AuthGuard]},
+  { path: 'forget-password', component: ForgetPasswordComponent},
 ];
 
 @NgModule({

@@ -1,0 +1,23 @@
+.menu{
+  display: flex;
+}
+
+a, button{
+  color: white;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+button:focus{ outline: none; }
+
+.loader-container{
+  position: fixed;
+  width: 100%;
+  z-index: 99;
+}
+
+mat-toolbar{
+  height: 10%;
+}

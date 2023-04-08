@@ -29,7 +29,8 @@
                     </app-field-error>
                   </div>
                 </div>
-              <button type="submit" class="btn btn-primary loginBtn mt-4"
+              <a routerLink="/identify-user" [queryParams]="{type: 'forget-password'}">Forget password</a><br>
+              <button type="submit" class="btn btn-primary loginBtn mt-3"
                 [disabled]="!loginForm.valid">Login</button>
             </form>
           </mat-card-content>

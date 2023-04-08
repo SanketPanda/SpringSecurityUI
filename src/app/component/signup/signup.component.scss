@@ -1,0 +1,39 @@
+input, textarea {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: whitesmoke;
+}
+
+input:focus, textarea:focus {
+  background-color: rgb(224, 224, 224);
+  outline: none;
+}
+
+input:read-only, textarea:read-only {
+  background-color: #c3c3c3;
+  outline: none;
+}
+
+.card-heading{
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.mat-mdc-card-header {
+  display: flex;
+  justify-content: center; /* align horizontal */
+  align-items: center; /* align vertical */
+
+  font-style: bold;
+}
+
+.signup-container{
+  max-width: 60%;
+}
+
+.errorMsg{
+  color: red;
+  text-align: center;
+}

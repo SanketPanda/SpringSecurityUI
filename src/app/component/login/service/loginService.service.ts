@@ -1,66 +1,77 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Subscriber, of } from 'rxjs';
 import { Observable } from 'rxjs';
 import { environment } from 'src/app/environments/environment';
 import { loginUserDTO } from 'src/app/model/login.model';
 import { HttpServiceService } from 'src/app/service/http-service.service';
 import { Router } from '@angular/router';
+import { ObjectUtils } from 'src/app/helper/object-utils';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LoginService {
-
-
-
-  USER_NAME_SESSION_ATTRIBUTE = 'authenticatedUserData'
-  USER_NAME_ATTRIBUTE = 'authenticatedUserEmail'
+  errorMsg!: String;
+  USER_NAME_SESSION_ATTRIBUTE = 'authenticatedUserData';
+  USER_NAME_ATTRIBUTE = 'authenticatedUserEmail';
   email!: string;
 
-  constructor(
-    private router: Router,
-    private httpService: HttpServiceService
-  ) { }
+  constructor(private router: Router, private httpService: HttpServiceService) {
+    this.errorMsg = '';
+  }
 
-  login(loginDTO: loginUserDTO){
-    this.httpService
-    .post(environment.login, loginDTO)
-    .subscribe(
+  login(loginDTO: loginUserDTO) {
+    this.errorMsg = '';
+    this.httpService.post(environment.login, loginDTO).subscribe(
       (token: any) => {
         this.onSuccessfulLogin(token.accessToken, loginDTO.email);
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/user-list']);
       },
       (error) => {
-        alert(error.error.errorMessage);
+        const errorList = ObjectUtils.getKeyValuePair(error.error);
+        if (errorList) {
+          console.log(errorList);
+          errorList.forEach((error) => {
+            if (error.key != 'errorCode')
+              if (error.key == 'errorMessage')
+                this.errorMsg += error.value + '\n';
+              else this.errorMsg += error.key + '-' + error.value + '\n';
+          });
+          alert(this.errorMsg);
+          return;
+        }
+        this.errorMsg = JSON.stringify(error);
+        alert(this.errorMsg);
       }
     );
   }
 
   onSuccessfulLogin(token: string, email: string) {
-    sessionStorage.setItem(this.USER_NAME_SESSION_ATTRIBUTE, token);
-    sessionStorage.setItem(this.USER_NAME_ATTRIBUTE, email);
+    localStorage.setItem(this.USER_NAME_SESSION_ATTRIBUTE, token);
+    localStorage.setItem(this.USER_NAME_ATTRIBUTE, email);
   }
 
   logout() {
-    sessionStorage.removeItem(this.USER_NAME_SESSION_ATTRIBUTE);
-    sessionStorage.removeItem(this.USER_NAME_ATTRIBUTE);
+    localStorage.removeItem(this.USER_NAME_SESSION_ATTRIBUTE);
+    localStorage.removeItem(this.USER_NAME_ATTRIBUTE);
   }
 
   isUserLoggedIn() {
-    let token = sessionStorage.getItem(this.USER_NAME_SESSION_ATTRIBUTE)
-    if (token === null) return false
-    return true
+    let token = localStorage.getItem(this.USER_NAME_SESSION_ATTRIBUTE);
+    if (token === null) return false;
+    return true;
   }
 
   getLoggedInUserAuthData() {
-    let token = sessionStorage.getItem(this.USER_NAME_SESSION_ATTRIBUTE);
-    if (token === null) return null
+    let token = localStorage.getItem(this.USER_NAME_SESSION_ATTRIBUTE);
+    if (token === null) return null;
     return token;
   }
 
-  getLoggedInUserEmail(){
-    let email = sessionStorage.getItem(this.USER_NAME_ATTRIBUTE);
-    if (email === null) return null
+  getLoggedInUserEmail() {
+    let email = localStorage.getItem(this.USER_NAME_ATTRIBUTE);
+    if (email === null) return null;
     return email;
   }
 }

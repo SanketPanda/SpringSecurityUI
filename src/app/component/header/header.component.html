@@ -1,11 +1,15 @@
-<mat-toolbar>
+<mat-toolbar color="primary">
   <a class="navbar-brand heading" routerLink="/"><span>Spring Security - Signup/Login</span></a>
   <span class="example-spacer"></span>
   <div class="btns-container">
-  <button mat-raised-button color="primary" class="mr-3" routerLink="/login" *ngIf="!isUserLoggedIn()">Login</button>
-  <button mat-raised-button color="accent" routerLink="/signup" *ngIf="!isUserLoggedIn()">Signup</button>
-  <button  mat-button color="primary" class="mr-3" routerLink="/profile" *ngIf="isUserLoggedIn()">Profile</button>
-  <button  mat-button color="primary" class="mr-3" routerLink="/dashboard" *ngIf="isUserLoggedIn()">Dashboard</button>
-  <button  mat-button color="accent" (click)="logout()" *ngIf="isUserLoggedIn()">Logout</button>
+  <button mat-button class="mr-3" routerLink="/login" *ngIf="!isUserLoggedIn()">Login</button>
+  <button mat-button routerLink="/signup" *ngIf="!isUserLoggedIn()">Signup</button>
+  <button mat-button class="mr-3" routerLink="/profile" *ngIf="isUserLoggedIn()">Profile</button>
+  <button mat-button class="mr-3" routerLink="/user-list" *ngIf="isUserLoggedIn()">User List</button>
+  <button mat-button class="mr-3" routerLink="/dashboard" *ngIf="isUserLoggedIn()">Dashboard</button>
+  <button mat-button (click)="logout()" *ngIf="isUserLoggedIn()">Logout</button>
   </div>
 </mat-toolbar>
+<div class="loader-container" *ngIf="loaderService.isLoading | async">
+  <mat-progress-bar mode="indeterminate" value="40"></mat-progress-bar>
+</div>

@@ -1,0 +1,11 @@
+.card-heading{
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.mat-mdc-card-header {
+  display: flex;
+  justify-content: center; /* align horizontal */
+  align-items: center; /* align vertical */
+  font-style: bold;
+}

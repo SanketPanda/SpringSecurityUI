@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row">
+    <div class="container mt-5 ml-3 mr-3">
+      <div class="roleForm-container m-auto">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title class="card-heading">Registered users</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="row">
+              <div class="container">
+                <div class="table-container mt-5">
+                  <table>
+                    <tr>
+                      <th>First Name</th>
+                      <th>Last Name</th>
+                    </tr>
+                    <tr *ngFor="let user of users">
+                      <td>{{user.firstName}}</td>
+                      <td>{{user.lastName}}</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

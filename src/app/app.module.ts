@@ -18,6 +18,13 @@ import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { BasicAuthInterceptorService } from './service/basic-auth-interceptor.service';
 import { ProfileComponent } from './component/profile/profile.component';
 import { IdentifyUserComponent } from './component/identify-user/identify-user.component';
+import { UserListComponent } from './component/user-list/user-list.component';
+import { AuthGuard } from './helper/auth-guard';
+import { ResetPasswordComponent } from './component/reset-password/reset-password.component';
+import { ForgetPasswordComponent } from './component/forget-password/forget-password.component';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {OverlayModule} from '@angular/cdk/overlay';
 
 @NgModule({
   declarations: [
@@ -28,7 +35,10 @@ import { IdentifyUserComponent } from './component/identify-user/identify-user.c
     FieldErrorComponent,
     DashboardComponent,
     ProfileComponent,
-    IdentifyUserComponent
+    IdentifyUserComponent,
+    UserListComponent,
+    ResetPasswordComponent,
+    ForgetPasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -40,10 +50,14 @@ import { IdentifyUserComponent } from './component/identify-user/identify-user.c
     MatButtonModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatProgressBarModule,
+    MatSlideToggleModule,
+    OverlayModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptorService, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptorService, multi: true },
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

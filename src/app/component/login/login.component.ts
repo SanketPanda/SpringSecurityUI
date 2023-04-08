@@ -9,7 +9,7 @@ import { LoginService } from './service/loginService.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
   public loginForm!: FormGroup;
@@ -19,18 +19,14 @@ export class LoginComponent implements OnInit {
     private loginService: LoginService,
     private router: Router
     ) {
-    const navigation = this.router.getCurrentNavigation();
-    const state = navigation?.extras.state as {data: string};
-    this.errorMsg = state?.data;
+    this.errorMsg = '';
   }
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
       email: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl(null, [
-        Validators.required,
-        Validators.maxLength(15),
-        Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,15}')
+        Validators.required
       ])
     });
   }

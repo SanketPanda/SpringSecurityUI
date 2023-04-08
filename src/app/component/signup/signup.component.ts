@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NavigationExtras, Router } from '@angular/router';
 import { environment } from 'src/app/environments/environment';
+import { ObjectUtils } from 'src/app/helper/object-utils';
 import { registerUserDTO } from 'src/app/model/register.model';
 import { HttpServiceService } from 'src/app/service/http-service.service';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css'],
+  styleUrls: ['./signup.component.scss'],
 })
 export class SignupComponent implements OnInit {
   public signupForm!: FormGroup;
@@ -16,13 +17,13 @@ export class SignupComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private httpService: HttpServiceService,
-    ) {}
+    private httpService: HttpServiceService
+  ) {}
 
   ngOnInit(): void {
     this.signupForm = new FormGroup({
-      roles: new FormControl(null,),
-      userId: new FormControl(null,),
+      roles: new FormControl(null),
+      userId: new FormControl(null),
       firstName: new FormControl(null, [
         Validators.required,
         Validators.minLength(4),
@@ -47,36 +48,45 @@ export class SignupComponent implements OnInit {
         Validators.pattern(
           '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{8,15}'
         ),
-      ])
+      ]),
     });
   }
 
   onFormSubmit() {
-    if(!this.validatePassword()) return;
+    if (!this.validatePassword()) return;
     const userDTO: any = this.signupForm.value as registerUserDTO;
     userDTO.roles = 'USER';
     delete userDTO['confirmPassword'];
-    this.httpService
-      .post(environment.signUp, userDTO)
-      .subscribe(
-        (data: registerUserDTO) => {
-          alert('A verification link has been sent to your registered email, please use the link to activate your account.');
-          this.router.navigate(['/login']);
-        },
-        (error) => {
-          console.log('Error occured - ' + JSON.stringify(error));
-          if(error.error?.errorMessage){
-            this.errorMsg = error.error.errorMessage;
-            return;
-          }
-          this.errorMsg = JSON.stringify(error);
+    this.errorMsg = '';
+    this.httpService.post(environment.signUp, userDTO).subscribe(
+      (data: registerUserDTO) => {
+        alert(
+          'A verification link has been sent to your registered email, please use the link to activate your account.'
+        );
+        this.router.navigate(['/login']);
+      },
+      (error) => {
+        const errorList = ObjectUtils.getKeyValuePair(error.error);
+        if (errorList) {
+          console.log(errorList);
+          errorList.forEach((error) => {
+            if (error.key != 'errorCode')
+              if (error.key == 'errorMessage')
+                this.errorMsg += error.value + '\n';
+              else this.errorMsg += error.key + '-' + error.value + '\n';
+          });
+          return;
         }
-      );
+        this.errorMsg = JSON.stringify(error);
+      }
+    );
   }
 
-  validatePassword(){
-    if(this.signupForm.controls['password'].value ==
-    this.signupForm.controls['confirmPassword'].value){
+  validatePassword() {
+    if (
+      this.signupForm.controls['password'].value ==
+      this.signupForm.controls['confirmPassword'].value
+    ) {
       return true;
     }
     alert('Password did not match!');

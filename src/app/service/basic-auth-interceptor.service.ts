@@ -1,6 +1,8 @@
 import { HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, finalize } from 'rxjs';
+import { LoginService } from '../component/login/service/loginService.service';
+import { LoaderServiceService } from './loader-service.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,10 +10,13 @@ import { Observable } from 'rxjs';
 export class BasicAuthInterceptorService implements HttpInterceptor {
 
   constructor(
+    private loginService: LoginService,
+    public loaderService: LoaderServiceService
   ) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>{
-    let authData = sessionStorage.getItem('authenticatedUserData');
+    this.loaderService.isLoading.next(true);
+    let authData = this.loginService.getLoggedInUserAuthData();
     let headers = new HttpHeaders();
     headers = headers.append("Authorization", "Bearer " + authData);
     if(authData){
@@ -19,6 +24,12 @@ export class BasicAuthInterceptorService implements HttpInterceptor {
         headers: headers,
       });
     }
-    return next.handle(request);
+    return next.handle(request).pipe(
+      finalize(
+        () => {
+          this.loaderService.isLoading.next(false);
+        }
+      )
+    )
   }
 }

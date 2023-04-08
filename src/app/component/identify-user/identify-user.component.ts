@@ -1,42 +1,100 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { loginUserDTO } from 'src/app/model/login.model';
 import { LoginService } from '../login/service/loginService.service';
+import { HttpServiceService } from 'src/app/service/http-service.service';
+import { environment } from 'src/app/environments/environment';
+import { ObjectUtils } from 'src/app/helper/object-utils';
 
 @Component({
   selector: 'app-identify-user',
   templateUrl: './identify-user.component.html',
-  styleUrls: ['./identify-user.component.css']
+  styleUrls: ['./identify-user.component.scss']
 })
 export class IdentifyUserComponent {
   public loginForm!: FormGroup;
   errorMsg!: String;
   title: string = 'Reset Password';
+  type!: string;
+
 
   constructor(
-    private loginService: LoginService,
-    private router: Router
+    private httpService: HttpServiceService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
     ) {
-    const navigation = this.router.getCurrentNavigation();
-    const state = navigation?.extras.state as {data: string};
-    this.errorMsg = state?.data;
+    this.errorMsg = '';
   }
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
-      email: new FormControl(null, [Validators.required, Validators.email]),
-      password: new FormControl(null, [
-        Validators.required,
-        Validators.maxLength(15),
-        Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,15}')
-      ])
+      email: new FormControl(null, [Validators.required, Validators.email])
+    });
+    this.activatedRoute.queryParams.subscribe(params => {
+      if(!params['type']) this.errorMsg = 'Type not provided';
+      this.type = params['type'];
     });
   }
 
   onFormSubmit(){
-    const userDTO = this.loginForm.value as loginUserDTO;
-    this.loginService.login(userDTO);
+    this.errorMsg = '';
+    if(this.type && this.type == 'forget-password'){
+      this.forgetPassword();
+      return;
+    }else{
+      this.resetPassword();
+    }
+  }
+
+  resetPassword(){
+    this.httpService.get(environment.resetPasswordToken + '/' + this.loginForm.controls['email'].value).subscribe((data: any)=>{
+      if(!data || data.length<=0) return;
+      console.log('data updated');
+      console.log(data);
+      alert(data.message);
+      this.router.navigate(['/dashboard']);
+    },
+    (error) => {
+      const errorList = ObjectUtils.getKeyValuePair(error.error);
+      if(errorList){
+        console.log(errorList);
+        errorList.forEach(error => {
+          if(error.key != 'errorCode')
+            if(error.key == 'errorMessage')
+            this.errorMsg += error.value + '\n';
+            else this.errorMsg += error.key + '-' + error.value + '\n';
+        })
+        return;
+      }
+      this.errorMsg = JSON.stringify(error);
+    }
+    )
+  }
+
+  forgetPassword(){
+    this.httpService.get(environment.forgetPasswordToken + '/' + this.loginForm.controls['email'].value).subscribe((data: any)=>{
+      if(!data || data.length<=0) return;
+      console.log('data updated');
+      console.log(data);
+      alert(data.message);
+      this.router.navigate(['/dashboard']);
+    },
+    (error) => {
+      const errorList = ObjectUtils.getKeyValuePair(error.error);
+      if(errorList){
+        console.log(errorList);
+        errorList.forEach(error => {
+          if(error.key != 'errorCode')
+            if(error.key == 'errorMessage')
+            this.errorMsg += error.value + '\n';
+            else this.errorMsg += error.key + '-' + error.value + '\n';
+        })
+        return;
+      }
+      this.errorMsg = JSON.stringify(error);
+    }
+    )
   }
 
   isFieldValid(field: string) {
