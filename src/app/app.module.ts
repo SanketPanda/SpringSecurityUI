@@ -24,7 +24,6 @@ import { ResetPasswordComponent } from './component/reset-password/reset-passwor
 import { ForgetPasswordComponent } from './component/forget-password/forget-password.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import {OverlayModule} from '@angular/cdk/overlay';
 
 @NgModule({
   declarations: [
@@ -52,8 +51,7 @@ import {OverlayModule} from '@angular/cdk/overlay';
     FormsModule,
     HttpClientModule,
     MatProgressBarModule,
-    MatSlideToggleModule,
-    OverlayModule
+    MatSlideToggleModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptorService, multi: true },

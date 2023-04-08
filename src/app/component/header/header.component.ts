@@ -1,10 +1,7 @@
-import { Component, EventEmitter, HostBinding, OnInit, Output } from '@angular/core';
-import { Action } from 'src/app/model/action.model';
+import { Component} from '@angular/core';
 import { LoginService } from '../login/service/loginService.service';
 import { Router } from '@angular/router';
 import { LoaderServiceService } from 'src/app/service/loader-service.service';
-import { FormControl } from '@angular/forms';
-import { OverlayContainer } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-header',
@@ -13,31 +10,13 @@ import { OverlayContainer } from '@angular/cdk/overlay';
 })
 export class HeaderComponent{
 
-  toggleControl = new FormControl(false);
-  @HostBinding('class') className = '';
-  darkClassName = 'theme-dark';
-  lightClassName = 'theme-light';
 
   constructor(
     private loginService: LoginService,
     private router: Router,
-    public loaderService: LoaderServiceService,
-    private overlay: OverlayContainer
+    public loaderService: LoaderServiceService
   ){
     this.isUserLoggedIn();
-  }
-
-  ngOnInit(){
-    this.toggleControl.valueChanges.subscribe((darkMode) => {
-      const darkClassName = 'darkMode';
-      this.className = darkMode ? darkClassName : '';
-      if (darkMode) {
-        this.overlay.getContainerElement().classList.add(darkClassName);
-        this.className = darkClassName;
-      } else {
-        this.overlay.getContainerElement().classList.remove(darkClassName);
-      }
-    });
   }
 
   isUserLoggedIn(){

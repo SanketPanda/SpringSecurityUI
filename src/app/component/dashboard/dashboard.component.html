@@ -4,9 +4,49 @@
       <div class="roleForm-container m-auto">
         <mat-card>
           <mat-card-header>
-            <mat-card-title class="card-heading">Spring Security</mat-card-title>
+            <mat-card-title class="card-heading">
+              <img src="../../../assets/Sanket.png" class="profileImg" alt="sanket_panda">
+            </mat-card-title>
           </mat-card-header>
           <mat-card-content>
+            <div class="row">
+              <h4>Hy thanks for visiting the site! My name is Sanket Panda, i am a full-stack web developer having 5
+                years of expeirence.
+                I have created this site to showcase my knowledge in Java, SprinngBoot, SpringSecurity and Angular.
+              </h4>
+            </div>
+            <h2 class="ml-3">Features:- </h2>
+            <ul>
+              <li>
+                User registeration using firstname, lastname, email Id and password.
+              </li>
+              <li>
+                Check if email already registered if yes return response as email already registered, if not create a
+                new user and set it in deactivate state.
+              </li>
+              <li>
+                Once user is created an email will be sent to registered email with a activation link. Link is valid
+                till 1 hour. Once user clicks on activation link user account will be activated and he can login using
+                his credentials.
+              </li>
+              <li>
+                If user tries to login without activating his account it will return response as account not verified
+                yet.
+              </li>
+              <li>
+                If the activation link is expired users can request to resend verification link and it will be sent to
+                their registered email.
+              </li>
+              <li>
+                Once logged in successful using their credentials system will generate a JWT token and it will be
+                returned in the response. The token is valid for 3 hour. Once the jwt token is expired users need to
+                re-login.
+              </li>
+              <li>
+                Users can use the jwt token to update theirs profile(firstname, lastname for now) and view all the
+                Users. If they do not use the jwt token they will get Unauthorized access response from api.
+              </li>
+            </ul>
 
           </mat-card-content>
         </mat-card>
