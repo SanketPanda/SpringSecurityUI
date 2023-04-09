@@ -13,12 +13,18 @@ a, button{
 button:focus{ outline: none; }
 
 .loader-container{
-  position: relative;
   width: 100%;
   z-index: 99;
 }
 
 .toolbar-heading{
-  position: relative;
   height: 4rem;
+}
+
+.navbar-heading{
+  background: #009688;
+  color: white;
+}
+.navbar-brand{
+  color: white;
 }

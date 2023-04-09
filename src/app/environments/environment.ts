@@ -1,6 +1,6 @@
 export const environment = {
     production: true,
-    baseUrl: 'https://spring-security-api.onrender.com/api',
+    baseUrl: 'http://52.66.113.14:8000/api',
     baseUrlDev: 'http://localhost:8000/api',
     signUp: '/auth/register',
     confirmAccount: '/auth/confirm-account',

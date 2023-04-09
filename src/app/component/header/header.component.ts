@@ -10,6 +10,7 @@ import { LoaderServiceService } from 'src/app/service/loader-service.service';
 })
 export class HeaderComponent{
 
+  public isCollapsed: Boolean = false;
 
   constructor(
     private loginService: LoginService,
@@ -17,6 +18,10 @@ export class HeaderComponent{
     public loaderService: LoaderServiceService
   ){
     this.isUserLoggedIn();
+  }
+
+  public onToggleSidenav = () => {
+
   }
 
   isUserLoggedIn(){

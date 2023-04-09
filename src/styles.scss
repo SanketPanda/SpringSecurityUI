@@ -37,8 +37,8 @@ $angular-dark-theme: mat.define-dark-theme(
   background-color: black;
 }
 
-html, body { height: 100%;}
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: whitesmoke;}
+html, body { height: 100%; width: 100%;}
+body { margin: 0; padding: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: whitesmoke;}
 
 button{
   outline: none !important;

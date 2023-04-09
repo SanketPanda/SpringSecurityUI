@@ -24,6 +24,7 @@ import { ResetPasswordComponent } from './component/reset-password/reset-passwor
 import { ForgetPasswordComponent } from './component/forget-password/forget-password.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { NgxNavbarModule } from 'ngx-bootstrap-navbar';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     FormsModule,
     HttpClientModule,
     MatProgressBarModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    NgxNavbarModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptorService, multi: true },
