@@ -10,13 +10,12 @@
   <button mat-button (click)="logout()" *ngIf="isUserLoggedIn()">Logout</button>
   </div>
 </mat-toolbar> -->
-<nav ngxNavbarDynamicExpand class="navbar-light navbar-heading">
+<!-- <nav ngxNavbarDynamicExpand class="navbar-light navbar-heading">
   <a class="navbar-brand" routerLink="/">Spring Security</a>
   <span class="example-spacer"></span>
   <button
     class="navbar-toggler"
     type="button"
-    (click)="collapse.toggle()"
     aria-controls="main-nav"
     aria-expanded="false"
     aria-label="Navigáció kapcsoló"
@@ -26,7 +25,7 @@
     >
     </span>
   </button>
-  <ngx-navbar-collapse id="main-nav" #collapse="ngxNavbarCollapse">
+  <nav id="main-nav">
     <ul class="navbar-nav ml-auto">
       <li class="nav-item active">
         <button style="color: white;" class="nav-link" mat-button class="mr-3" routerLink="/login" *ngIf="!isUserLoggedIn()">Login</button>
@@ -47,8 +46,39 @@
         <button style="color: white;" mat-button (click)="logout()" *ngIf="isUserLoggedIn()">Logout</button>
       </li>
     </ul>
-  </ngx-navbar-collapse>
-</nav>
+  </nav>
+</nav> -->
+<div class="pos-f-t">
+  <nav class="navbar navbar-light navbar-heading">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </nav>
+  <div class="collapse" id="navbarToggleExternalContent">
+    <div class="navbar-heading p-4">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+          <button style="color: white;" class="nav-link" mat-button class="mr-3" routerLink="/login" *ngIf="!isUserLoggedIn()">Login</button>
+        </li>
+        <li class="nav-item">
+          <button style="color: white;" mat-button routerLink="/signup" *ngIf="!isUserLoggedIn()">Signup</button>
+        </li>
+        <li class="nav-item">
+          <button style="color: white;" mat-button class="mr-3" routerLink="/profile" *ngIf="isUserLoggedIn()">Profile</button>
+        </li>
+        <li class="nav-item">
+          <button style="color: white;" mat-button class="mr-3" routerLink="/user-list" *ngIf="isUserLoggedIn()">User List</button>
+        </li>
+        <li class="nav-item">
+          <button style="color: white;" mat-button class="mr-3" routerLink="/dashboard" *ngIf="isUserLoggedIn()">Dashboard</button>
+        </li>
+        <li class="nav-item">
+          <button style="color: white;" mat-button (click)="logout()" *ngIf="isUserLoggedIn()">Logout</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
 <div class="loader-container" *ngIf="loaderService.isLoading | async">
   <mat-progress-bar mode="indeterminate" value="40"></mat-progress-bar>
 </div>
