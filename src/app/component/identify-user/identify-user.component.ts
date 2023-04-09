@@ -35,7 +35,21 @@ export class IdentifyUserComponent {
     this.activatedRoute.queryParams.subscribe(params => {
       if(!params['type']) this.errorMsg = 'Type not provided';
       this.type = params['type'];
+      this.setPageTitle();
     });
+  }
+
+  setPageTitle(){
+    if(!this.type){
+      Swal.fire('Failure', 'Url is broken', 'error').then((result)=>{
+        if(result.value){
+          this.router.navigate(['/dashboard']);
+        }
+      });
+    }
+    if(this.type == 'forget-password'){this.title = 'Forget Password';}
+    else if(this.type == 'reset-password'){this.title = 'Reset Password';}
+    else {this.title = 'Resend Acoount Verification Link';}
   }
 
   onFormSubmit(){
@@ -43,8 +57,10 @@ export class IdentifyUserComponent {
     if(this.type && this.type == 'forget-password'){
       this.forgetPassword();
       return;
-    }else{
+    }else if(this.type && this.type == 'reset-password'){
       this.resetPassword();
+    }else{
+      this.resendAccountVerificationLink();
     }
   }
 
@@ -100,6 +116,30 @@ export class IdentifyUserComponent {
       Swal.fire('Failure', this.errorMsg, 'error');
     }
     )
+  }
+
+  resendAccountVerificationLink(){
+    this.httpService.get(environment.resendVerificationToken + '/' + this.loginForm.controls['email'].value).subscribe(
+      (message: any) => {
+        if(!message || message.length<=0) return;
+        Swal.fire('success', message, 'success');
+      },
+      (error) => {
+        const errorList = ObjectUtils.getKeyValuePair(error.error);
+        if (errorList) {
+          errorList.forEach((error) => {
+            if (error.key != 'errorCode')
+              if (error.key == 'errorMessage')
+                this.errorMsg += error.value + '\n';
+              else this.errorMsg += error.key + '-' + error.value + '\n';
+          });
+          Swal.fire('Failure', this.errorMsg, 'error');
+          return;
+        }
+        this.errorMsg = JSON.stringify(error);
+        Swal.fire('Failure', this.errorMsg, 'error');
+      }
+    );
   }
 
   isFieldValid(field: string) {

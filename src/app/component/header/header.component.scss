@@ -18,6 +18,7 @@ button:focus{ outline: none; }
   z-index: 99;
 }
 
-mat-toolbar{
+.toolbar-heading{
+  position: relative;
   height: 4rem;
 }

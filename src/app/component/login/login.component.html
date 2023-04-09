@@ -26,6 +26,7 @@
                     </app-field-error>
                   </div>
                 </div>
+              <a routerLink="/identify-user" [queryParams]="{type: 'resend-verification-token'}">Resend account verification link</a><br>
               <a routerLink="/identify-user" [queryParams]="{type: 'forget-password'}">Forget password</a><br>
               <button type="submit" class="btn btn-primary loginBtn mt-3"
                 [disabled]="!loginForm.valid">Login</button>
