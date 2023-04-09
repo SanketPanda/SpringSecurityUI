@@ -6,6 +6,7 @@ import { LoginService } from '../login/service/loginService.service';
 import { HttpServiceService } from 'src/app/service/http-service.service';
 import { environment } from 'src/app/environments/environment';
 import { ObjectUtils } from 'src/app/helper/object-utils';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-identify-user',
@@ -14,7 +15,7 @@ import { ObjectUtils } from 'src/app/helper/object-utils';
 })
 export class IdentifyUserComponent {
   public loginForm!: FormGroup;
-  errorMsg!: String;
+  private errorMsg!: string;
   title: string = 'Reset Password';
   type!: string;
 
@@ -52,7 +53,7 @@ export class IdentifyUserComponent {
       if(!data || data.length<=0) return;
       console.log('data updated');
       console.log(data);
-      alert(data.message);
+      Swal.fire('success', data.message, 'success');
       this.router.navigate(['/dashboard']);
     },
     (error) => {
@@ -65,9 +66,11 @@ export class IdentifyUserComponent {
             this.errorMsg += error.value + '\n';
             else this.errorMsg += error.key + '-' + error.value + '\n';
         })
+        Swal.fire('Failure', this.errorMsg, 'error');
         return;
       }
       this.errorMsg = JSON.stringify(error);
+      Swal.fire('Failure', this.errorMsg, 'error');
     }
     )
   }
@@ -77,7 +80,7 @@ export class IdentifyUserComponent {
       if(!data || data.length<=0) return;
       console.log('data updated');
       console.log(data);
-      alert(data.message);
+      Swal.fire('success', data.message, 'success');
       this.router.navigate(['/dashboard']);
     },
     (error) => {
@@ -90,9 +93,11 @@ export class IdentifyUserComponent {
             this.errorMsg += error.value + '\n';
             else this.errorMsg += error.key + '-' + error.value + '\n';
         })
+        Swal.fire('Failure', this.errorMsg, 'error');
         return;
       }
       this.errorMsg = JSON.stringify(error);
+      Swal.fire('Failure', this.errorMsg, 'error');
     }
     )
   }
