@@ -13,7 +13,7 @@ import { LoginService } from './service/loginService.service';
 })
 export class LoginComponent implements OnInit {
   public loginForm!: FormGroup;
-  errorMsg!: String;
+  private errorMsg!: string;
 
   constructor(
     private loginService: LoginService,

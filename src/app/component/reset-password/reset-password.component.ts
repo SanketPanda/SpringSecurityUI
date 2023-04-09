@@ -5,6 +5,7 @@ import { environment } from 'src/app/environments/environment';
 import { ObjectUtils } from 'src/app/helper/object-utils';
 import { HttpServiceService } from 'src/app/service/http-service.service';
 import { LoginService } from '../login/service/loginService.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-reset-password',
@@ -13,7 +14,7 @@ import { LoginService } from '../login/service/loginService.service';
 })
 export class ResetPasswordComponent {
   public resetPasswordForm!: FormGroup;
-  errorMsg!: String;
+  private errorMsg!: string;
   title: string = 'Reset Password';
   resetPassworToken!: string;
 
@@ -55,7 +56,7 @@ export class ResetPasswordComponent {
       if(!data || data.length<=0) return;
       console.log('data updated');
       console.log(data);
-      alert(data.message);
+      Swal.fire('success', data.message, 'success');
       this.loginService.logout();
       this.router.navigate(['/login']);
     },
@@ -69,9 +70,11 @@ export class ResetPasswordComponent {
             this.errorMsg += error.value + '\n';
             else this.errorMsg += error.key + '-' + error.value + '\n';
         })
+        Swal.fire('Failure', this.errorMsg, 'error');
         return;
       }
       this.errorMsg = JSON.stringify(error);
+      Swal.fire('Failure', this.errorMsg, 'error');
     }
     )
   }

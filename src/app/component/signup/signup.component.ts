@@ -5,6 +5,7 @@ import { environment } from 'src/app/environments/environment';
 import { ObjectUtils } from 'src/app/helper/object-utils';
 import { registerUserDTO } from 'src/app/model/register.model';
 import { HttpServiceService } from 'src/app/service/http-service.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-signup',
@@ -13,7 +14,7 @@ import { HttpServiceService } from 'src/app/service/http-service.service';
 })
 export class SignupComponent implements OnInit {
   public signupForm!: FormGroup;
-  errorMsg!: String;
+  private errorMsg!: string;
 
   constructor(
     private router: Router,
@@ -60,9 +61,7 @@ export class SignupComponent implements OnInit {
     this.errorMsg = '';
     this.httpService.post(environment.signUp, userDTO).subscribe(
       (data: registerUserDTO) => {
-        alert(
-          'A verification link has been sent to your registered email, please use the link to activate your account.'
-        );
+        Swal.fire('success', 'A verification link has been sent to your registered email, please use the link to activate your account.','success');
         this.router.navigate(['/login']);
       },
       (error) => {
@@ -75,9 +74,11 @@ export class SignupComponent implements OnInit {
                 this.errorMsg += error.value + '\n';
               else this.errorMsg += error.key + '-' + error.value + '\n';
           });
+          Swal.fire('Failure', this.errorMsg, 'error');
           return;
         }
         this.errorMsg = JSON.stringify(error);
+        Swal.fire('Failure', this.errorMsg, 'error');
       }
     );
   }
@@ -89,7 +90,7 @@ export class SignupComponent implements OnInit {
     ) {
       return true;
     }
-    alert('Password did not match!');
+    Swal.fire('Failure', 'Password did not match!', 'error');
     return false;
   }
 

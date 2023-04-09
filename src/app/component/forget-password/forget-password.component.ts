@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { environment } from 'src/app/environments/environment';
 import { ObjectUtils } from 'src/app/helper/object-utils';
 import { HttpServiceService } from 'src/app/service/http-service.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-forget-password',
@@ -12,7 +13,7 @@ import { HttpServiceService } from 'src/app/service/http-service.service';
 })
 export class ForgetPasswordComponent {
   public forgetPasswordForm!: FormGroup;
-  errorMsg!: String;
+  private errorMsg!: string;
   title: string = 'Foorget Password';
   forgetPassworToken!: string;
 
@@ -54,7 +55,7 @@ export class ForgetPasswordComponent {
       if(!data || data.length<=0) return;
       console.log('data updated');
       console.log(data);
-      alert(data.message);
+      Swal.fire('success', data.message, 'success');
       this.router.navigate(['/login']);
     },
     (error) => {
@@ -67,9 +68,11 @@ export class ForgetPasswordComponent {
             this.errorMsg += error.value + '\n';
             else this.errorMsg += error.key + '-' + error.value + '\n';
         })
+        Swal.fire('Failure', this.errorMsg, 'error');
         return;
       }
       this.errorMsg = JSON.stringify(error);
+      Swal.fire('Failure', this.errorMsg, 'error');
     }
     )
   }
@@ -81,7 +84,7 @@ export class ForgetPasswordComponent {
     ) {
       return true;
     }
-    alert('Password did not match!');
+    Swal.fire('Failure', 'Password did not match!', 'error');
     return false;
   }
 

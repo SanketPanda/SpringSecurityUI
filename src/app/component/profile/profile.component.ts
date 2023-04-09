@@ -6,6 +6,7 @@ import { LoginService } from '../login/service/loginService.service';
 import { registerUserDTO } from 'src/app/model/register.model';
 import { ObjectUtils } from 'src/app/helper/object-utils';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-profile',
@@ -14,7 +15,7 @@ import { Router } from '@angular/router';
 })
 export class ProfileComponent {
   public editForm!: FormGroup;
-  errorMsg!: String;
+  private errorMsg!: string;
   canEditUser!: boolean;
 
   constructor(
@@ -59,8 +60,6 @@ export class ProfileComponent {
   updateUser(){
     this.errorMsg = '';
     this.httpService.put(environment.users+'/update', this.editForm.value).subscribe((data: registerUserDTO)=>{
-      console.log('data updated');
-      console.log(data);
       this.initializeFormValues();
       this.canEditUser = false;
     },
@@ -74,9 +73,11 @@ export class ProfileComponent {
             this.errorMsg += error.value + '\n';
             else this.errorMsg += error.key + '-' + error.value + '\n';
         })
+        Swal.fire('Failure', this.errorMsg, 'error');
         return;
       }
       this.errorMsg = JSON.stringify(error);
+      Swal.fire('Failure', this.errorMsg, 'error');
     }
     )
   }

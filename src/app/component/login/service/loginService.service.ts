@@ -7,12 +7,13 @@ import { loginUserDTO } from 'src/app/model/login.model';
 import { HttpServiceService } from 'src/app/service/http-service.service';
 import { Router } from '@angular/router';
 import { ObjectUtils } from 'src/app/helper/object-utils';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoginService {
-  errorMsg!: String;
+  private errorMsg!: string;
   USER_NAME_SESSION_ATTRIBUTE = 'authenticatedUserData';
   USER_NAME_ATTRIBUTE = 'authenticatedUserEmail';
   email!: string;
@@ -38,11 +39,11 @@ export class LoginService {
                 this.errorMsg += error.value + '\n';
               else this.errorMsg += error.key + '-' + error.value + '\n';
           });
-          alert(this.errorMsg);
+          Swal.fire('Failure', this.errorMsg, 'error');
           return;
         }
         this.errorMsg = JSON.stringify(error);
-        alert(this.errorMsg);
+        Swal.fire('Failure', this.errorMsg, 'error');
       }
     );
   }
