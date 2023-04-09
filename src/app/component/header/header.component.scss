@@ -13,7 +13,7 @@ a, button{
 button:focus{ outline: none; }
 
 .loader-container{
-  position: fixed;
+  position: relative;
   width: 100%;
   z-index: 99;
 }
