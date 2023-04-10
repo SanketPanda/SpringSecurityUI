@@ -1,7 +1,7 @@
 export const environment = {
     production: true,
-    baseUrl: 'http://52.66.113.14:8000/api',
-    baseUrlDev: 'http://localhost:8000/api',
+    baseUrl: 'http://spring-security-api-prod.eba-ismfpaip.ap-south-1.elasticbeanstalk.com/api',
+    baseUrlDev: 'http://localhost:5000/api',
     signUp: '/auth/register',
     confirmAccount: '/auth/confirm-account',
     resendVerificationToken:'/auth/verification-token',

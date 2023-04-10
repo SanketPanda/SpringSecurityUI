@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,6 +24,7 @@ import { ResetPasswordComponent } from './component/reset-password/reset-passwor
 import { ForgetPasswordComponent } from './component/forget-password/forget-password.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { GlobalErrorHandlerService } from './service/GlobalErrorHandlerService.service';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptorService, multi: true },
+    // { provide: ErrorHandler, useClass: GlobalErrorHandlerService },
     AuthGuard
   ],
   bootstrap: [AppComponent]

@@ -63,22 +63,6 @@ export class SignupComponent implements OnInit {
       (data: registerUserDTO) => {
         Swal.fire('success', 'A verification link has been sent to your registered email, please use the link to activate your account.','success');
         this.router.navigate(['/login']);
-      },
-      (error) => {
-        const errorList = ObjectUtils.getKeyValuePair(error.error);
-        if (errorList) {
-          console.log(errorList);
-          errorList.forEach((error) => {
-            if (error.key != 'errorCode')
-              if (error.key == 'errorMessage')
-                this.errorMsg += error.value + '\n';
-              else this.errorMsg += error.key + '-' + error.value + '\n';
-          });
-          Swal.fire('Failure', this.errorMsg, 'error');
-          return;
-        }
-        this.errorMsg = JSON.stringify(error);
-        Swal.fire('Failure', this.errorMsg, 'error');
       }
     );
   }
