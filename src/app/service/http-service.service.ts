@@ -9,7 +9,7 @@ import { LoginService } from '../component/login/service/loginService.service';
 })
 export class HttpServiceService {
 
-  baseUrl: string = environment.baseUrl;
+  baseUrl: string = environment.baseUrlProd;
 
   constructor(
     private http: HttpClient

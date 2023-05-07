@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { environment } from 'src/app/environments/environment';
 import { registerUserDTO } from 'src/app/model/register.model';
 import { HttpServiceService } from 'src/app/service/http-service.service';
@@ -12,7 +13,8 @@ export class UserListComponent {
   users: registerUserDTO[] = [];
 
   constructor(
-    private httpService: HttpServiceService
+    private httpService: HttpServiceService,
+    private router: Router,
   ) {
     this.refreshEmployeeList();
   }
@@ -22,7 +24,10 @@ export class UserListComponent {
       .get(environment.users+'/all')
       .subscribe((data: registerUserDTO[]) => {
         this.users = data;
-        console.log(this.users);
       });
+  }
+
+  showUserProfile(userId: any){
+    this.router.navigateByUrl(`/user-profile/${userId}`, { state: { userId: userId} });
   }
 }

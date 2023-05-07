@@ -1,0 +1,115 @@
+.card-heading{
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+}
+
+.mat-mdc-card-header {
+  display: flex;
+  justify-content: left; /* align horizontal */
+  align-items: left; /* align vertical */
+  font-style: bold;
+}
+
+.card-heading h4{
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.post h4{
+  text-align: left;
+}
+
+.profileImg{
+  height: 50px;
+  width: 50px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.comment-detail img{
+  height: 30px;
+  width: 30px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+.comment-detail{
+  display: flex;
+  align-items: center;
+}
+.commented-user{
+  margin-left: 0.5rem;
+  background-color: whitesmoke;
+  border-radius: 1rem;
+  padding: 0.5rem;
+}
+.footer mat-card-content{
+  margin-top: 1rem;
+}
+
+.footer{
+  max-height: 15rem;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+.profile-details{
+  margin-left: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.profile-details a{
+  margin: 0;
+  padding: 0;
+  font-size: 1.2rem;
+}
+
+.profile-details p {
+  font-size: 0.7rem;
+  height: 1rem;
+}
+.btn-container{
+  text-align: center;
+}
+
+.btn-container button{
+  width: 100%;
+}
+
+.add-comment mat-card-content{
+  margin: 0;
+  padding: 0;
+}
+.add-comment-detail{
+  border-radius: 1rem;
+}
+
+.add-comment-detail {
+  display: flex;
+}
+input, textarea {
+  width: 100%;
+  padding: 15px;
+  margin: 0;
+  border: none;
+  background: whitesmoke;
+  outline:none;
+}
+input:focus, input.form-control:focus {
+
+  outline:none !important;
+  outline-width: 0 !important;
+  box-shadow: none;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  background: whitesmoke;
+}
+#comment{
+ margin-right: 0.5rem;
+}
+.time-ago{
+  font-size: 0.7rem;
+  height: 1rem;
+}

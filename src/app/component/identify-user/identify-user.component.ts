@@ -65,8 +65,6 @@ export class IdentifyUserComponent {
   resetPassword(){
     this.httpService.get(environment.resetPasswordToken + '/' + this.loginForm.controls['email'].value).subscribe((data: any)=>{
       if(!data || data.length<=0) return;
-      console.log('data updated');
-      console.log(data);
       Swal.fire('success', data.message, 'success');
       this.router.navigate(['/profile']);
     }
@@ -76,8 +74,6 @@ export class IdentifyUserComponent {
   forgetPassword(){
     this.httpService.get(environment.forgetPasswordToken + '/' + this.loginForm.controls['email'].value).subscribe((data: any)=>{
       if(!data || data.length<=0) return;
-      console.log('data updated');
-      console.log(data);
       Swal.fire('success', data.message, 'success');
       this.router.navigate(['/login']);
     }

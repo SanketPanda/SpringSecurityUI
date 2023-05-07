@@ -8,8 +8,6 @@ export class GlobalErrorHandlerService implements ErrorHandler {
   }
 
   handleError(error:any) {
-    console.log('error to handle is');
-    console.log(error);
     Swal.fire('Failure', error, 'error');
   }
 

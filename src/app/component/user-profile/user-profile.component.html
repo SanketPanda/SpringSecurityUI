@@ -1,0 +1,63 @@
+<div class="container">
+  <div class="row">
+    <div class="container mt-4 mb-5">
+      <div class="signup-container m-auto">
+        <mat-card>
+          <mat-card-header>
+            <!-- <mat-card-title class="card-heading">Edit profile</mat-card-title> -->
+          </mat-card-header>
+          <mat-card-content>
+            <form [formGroup]="userForm">
+              <div class="row profile-img-container">
+                <img *ngIf="userForm.controls['firstName'].value == 'Sanket'" src="../../../assets/Sanket.png" class="profile-img"
+                alt="sanket_panda">
+              <img *ngIf="userForm.controls['firstName'].value != 'Sanket'" src="../../../assets/default_prfile_pic.png"
+                class="profile-img" alt="default_profile_pic">
+              </div>
+              <div class="row">
+                <div class="col">
+                  <label for="firstName"><b>First name</b></label>
+                  <input type="text" [readonly]="true" placeholder="Enter first name" name="firstName" id="firstName"
+                    class="form-control" formControlName="firstName" required ngDefaultControl>
+                </div>
+                <div class="col">
+                  <label for="lastName"><b>Last name</b></label>
+                  <input type="text" [readonly]="true" placeholder="Enter last name" name="lastName" id="lastName"
+                    class="form-control" formControlName="lastName" required ngDefaultControl>
+                </div>
+                </div>
+              </form>
+          </mat-card-content>
+        </mat-card>
+        <mat-card class="mb-5 mt-5" *ngFor="let post of posts">
+          <mat-card-header>
+            <mat-card-title class="card-heading">
+              <img *ngIf="post.usersDTO.firstName == 'Sanket'" src="../../../assets/Sanket.png" class="profileImg"
+                alt="sanket_panda">
+              <img *ngIf="post.usersDTO.firstName != 'Sanket'" src="../../../assets/default_prfile_pic.png"
+                class="profileImg" alt="default_profile_pic">
+              <div class="profile-details">
+                <a style="color: blueviolet; cursor: pointer;" (click)="showUserProfile(post.email)">{{post.usersDTO.firstName}} {{post.usersDTO.lastName}}</a>
+                <p>{{post.modDate | dateAgo}}</p>
+              </div>
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="post">
+              <h4>{{post.postDescription}}
+              </h4>
+            </div>
+            <hr *ngIf="post.commentDTO.length>0">
+            <div class="footer" *ngIf="post.commentDTO.length>0">
+              <app-comment [comments]="post.commentDTO" (onComentListUpdate)="updatePostList($event)"></app-comment>
+            </div>
+            <hr>
+            <div class="add-comment">
+              <app-add-comment [postId]="post.postId" (onComentAdd)="updatePostList($event)"></app-add-comment>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

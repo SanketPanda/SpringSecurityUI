@@ -54,8 +54,6 @@ export class ResetPasswordComponent {
     this.errorMsg = '';
     this.httpService.post(environment.resetPassword + '/' +this.resetPassworToken, this.resetPasswordForm.value).subscribe((data: any)=>{
       if(!data || data.length<=0) return;
-      console.log('data updated');
-      console.log(data);
       Swal.fire('success', data.message, 'success');
       this.loginService.logout();
       this.router.navigate(['/login']);

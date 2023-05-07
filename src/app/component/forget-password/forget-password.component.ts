@@ -53,8 +53,6 @@ export class ForgetPasswordComponent {
     this.errorMsg = '';
     this.httpService.post(environment.forgetPassword + '/' +this.forgetPassworToken, this.forgetPasswordForm.value).subscribe((data: any)=>{
       if(!data || data.length<=0) return;
-      console.log('data updated');
-      console.log(data);
       Swal.fire('success', data.message, 'success');
       this.router.navigate(['/login']);
     }

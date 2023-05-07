@@ -1,0 +1,23 @@
+textarea {
+  height: 8rem;
+  padding: 15px;
+  margin: 0;
+  border: none;
+  background: whitesmoke;
+  outline:none;
+  text-overflow: clip;
+}
+textarea:focus, textarea.form-control:focus {
+
+  outline:none !important;
+  outline-width: 0 !important;
+  box-shadow: none;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  background: whitesmoke;
+}
+.post-btn{
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  width: 100%;
+}

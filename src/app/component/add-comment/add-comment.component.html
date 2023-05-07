@@ -1,0 +1,9 @@
+<mat-card-content>
+  <div class="add-comment-detail">
+    <form style="width: 100%; display: flex;" [formGroup]="commentForm" (ngSubmit)="onFormSubmit()">
+      <textarea type="text" placeholder="Enter comment" name="comment" id="comment" class="form-control" required
+       formControlName="commentDescription" ngDefaultControl></textarea>
+      <button mat-raised-button color="primary" style="height: 3.2rem;">Comment</button>
+    </form>
+  </div>
+</mat-card-content>

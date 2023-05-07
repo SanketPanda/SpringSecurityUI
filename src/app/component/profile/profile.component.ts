@@ -69,7 +69,7 @@ export class ProfileComponent {
 
   initializeFormValues(){
     this.httpService
-      .get(environment.users+'/'+this.loginService.getLoggedInUserEmail())
+      .get(environment.getUserByEmail+this.loginService.getLoggedInUserEmail())
       .subscribe((data: registerUserDTO) => {
         this.editForm.controls['userId'].setValue(data.userId);
         this.editForm.controls['firstName'].setValue(data.firstName);

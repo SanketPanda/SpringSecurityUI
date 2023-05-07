@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { LoginService } from '../component/login/service/loginService.service';
+import Swal from 'sweetalert2';
 
 
 @Injectable()
@@ -13,9 +14,22 @@ export class AuthGuard implements CanActivate {
       if (authData) {
             return true;
         }
-        console.log('un-authorized access, redirecting to login page');
-        // not logged in so redirect to login page with the return url
-        this.router.navigate(['/login']);
+        Swal.fire({
+          title: 'Failure!',
+          text: "Unauthorized access, please login.",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Login',
+          cancelButtonText: 'Cancel'
+    }).then((result) => {
+        if (result.value) {
+          this.router.navigate(['/login']);
+        } else if(result.dismiss == Swal.DismissReason.cancel){
+
+        }
+    })
         return false;
     }
 }

@@ -1,81 +1,8 @@
-<div class="container">
-  <div class="row">
-    <div class="container mt-5 ml-3 mr-3">
-      <div class="roleForm-container m-auto">
-        <mat-card class="mb-5">
-          <mat-card-header>
-            <mat-card-title class="card-heading">
-              <img src="../../../assets/Sanket.png" class="profileImg" alt="sanket_panda">
-            </mat-card-title>
-          </mat-card-header>
-          <mat-card-content>
-            <div class="row">
-              <h4>Hy thanks for visiting the site! My name is Sanket Panda, i am a full-stack web developer having 5
-                years of expeirence.
-                I have created this site to showcase my knowledge in Java, SprinngBoot, SpringSecurity and Angular.
-              </h4>
-            </div>
-            <h2 class="ml-3">Current Features/ Workflow of application:- </h2>
-            <ul>
-              <li>
-                User registeration using firstname, lastname, email Id and password.
-              </li>
-              <li>
-                Check if email already registered if yes return response as email already registered, if not create a
-                new user and set it in deactivate state.
-              </li>
-              <li>
-                Once user is created an email will be sent to registered email with a activation link. Link is valid
-                till 1 hour. Once user clicks on activation link user account will be activated and he can login using
-                his credentials.
-              </li>
-              <li>
-                If user tries to login without activating his account it will return response as account not verified
-                yet.
-              </li>
-              <li>
-                If the activation link is expired users can request to resend verification link and it will be sent to
-                their registered email.
-              </li>
-              <li>
-                Once logged in successful using their credentials system will generate a JWT token and it will be
-                returned in the response. The token is valid for 3 hour. Once the jwt token is expired users need to
-                re-login.
-              </li>
-              <li>
-                Users can use the jwt token to update theirs profile(firstname, lastname for now) and view all the
-                Users. If they do not use the jwt token they will get Unauthorized access response from api.
-              </li>
-              <li>
-                Users can reset/change the password from the profile page by using reset password link.
-              </li>
-              <li>
-                If user forget their password they can use the forget password link in login page and create a new password.
-              </li>
-            </ul>
-            <h2 class="ml-3">New features to be added:- </h2>
-            <ul>
-              <li>
-                Switch between light mode and dark mode(Curretly it is in light mode by default).
-              </li>
-              <li>
-                Send friend request to existing users.
-              </li>
-              <li>
-                Send message to users who have accepted your frield request.
-              </li>
-              <li>
-                Post your thoughs, images on a dashboard.
-              </li>
-              <li>
-                View posts and images posted by your friends or users who have posted it in public mode.
-              </li>
-            </ul>
-              <h2 style="text-align: center;"> A lot of cool features will be added in future, register and stay tuned!
-              </h2>
-          </mat-card-content>
-        </mat-card>
-      </div>
-    </div>
+<div class="row">
+  <div class="col-lg-1">
+    <!-- <app-left-nav></app-left-nav> -->
+  </div>
+  <div class="col-lg-11">
+    <app-post></app-post>
   </div>
 </div>

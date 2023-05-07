@@ -1,0 +1,40 @@
+
+.btn-container{
+  text-align: center;
+}
+
+.btn-container button{
+  width: 100%;
+}
+
+.add-comment mat-card-content{
+  margin: 0;
+  padding: 0;
+}
+.add-comment-detail{
+  border-radius: 1rem;
+}
+
+.add-comment-detail {
+  display: flex;
+}
+textarea {
+  width: 100%;
+  height: 3.5rem;
+  padding: 15px;
+  margin: 0;
+  border: none;
+  background: whitesmoke;
+  outline:none;
+}
+textarea:focus, textarea.form-control:focus {
+  outline:none !important;
+  outline-width: 0 !important;
+  box-shadow: none;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  background: whitesmoke;
+}
+#comment{
+ margin-right: 0.5rem;
+}

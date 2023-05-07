@@ -1,0 +1,75 @@
+.card-heading{
+  margin-bottom: 1rem;
+  display: flex;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.mat-mdc-card-header {
+  display: flex;
+  justify-content: left; /* align horizontal */
+  align-items: left; /* align vertical */
+  font-style: bold;
+}
+
+h4{
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.post h4{
+  text-align: left;
+}
+
+.profileImg{
+  height: 50px;
+  width: 50px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.profile-details{
+  margin-left: 1rem;
+}
+
+.profile-details h2, p{
+  margin: 0;
+  padding: 0;
+}
+
+.profile-details a {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+}
+
+ul{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+li{
+  display: inline-flex;
+  justify-content: center; /* align horizontal */
+  align-items: center; /* align vertical */
+  margin-left: 0.5rem;
+}
+
+li a{
+  margin-left: 0.2rem;
+}
+
+.educational-details{
+  margin-bottom: 0.5rem;
+}
+
+.educational-details h2, p{
+  padding: 0;
+  margin: 0;
+}
+
+.social-profiles h2{
+  padding: 0;
+  margin: 0;
+}

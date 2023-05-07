@@ -10,10 +10,14 @@ import { AuthGuard } from './helper/auth-guard';
 import { UserListComponent } from './component/user-list/user-list.component';
 import { ResetPasswordComponent } from './component/reset-password/reset-password.component';
 import { ForgetPasswordComponent } from './component/forget-password/forget-password.component';
+import { PostComponent } from './component/post/post.component';
+import { UserProfileComponent } from './component/user-profile/user-profile.component';
 
 const routes: Routes = [
   { path: 'user-list', component: UserListComponent, canActivate: [AuthGuard]},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
+  { path: 'post', component: PostComponent, canActivate: [AuthGuard]},
+  { path: 'user-profile/:id', component: UserProfileComponent, canActivate: [AuthGuard], data: {userId: ''}},
   { path: '', component: DashboardComponent},
   { path: 'dashboard', component: DashboardComponent},
   { path: 'signup', component: SignupComponent},

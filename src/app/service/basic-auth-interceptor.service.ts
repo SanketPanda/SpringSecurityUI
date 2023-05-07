@@ -46,7 +46,6 @@ export class BasicAuthInterceptorService implements HttpInterceptor {
         const errorList = ObjectUtils.getKeyValuePair(error.error);
         this.errorMsg = '';
         if (errorList) {
-          console.log(errorList);
           errorList.forEach((error) => {
             if (error.key != 'errorCode')
               if (error.key == 'errorMessage')

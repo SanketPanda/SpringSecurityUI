@@ -25,6 +25,16 @@ import { ForgetPasswordComponent } from './component/forget-password/forget-pass
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { GlobalErrorHandlerService } from './service/GlobalErrorHandlerService.service';
+import { PostComponent } from './component/post/post.component';
+import { LeftNavComponent } from './component/left-nav/left-nav.component';
+import { UserProfileComponent } from './component/user-profile/user-profile.component';
+import { AddPostComponent } from './component/add-post/add-post.component';
+import { AddCommentComponent } from './component/add-comment/add-comment.component';
+import {MatMenuModule} from '@angular/material/menu';
+import { CommentComponent } from './component/comment/comment.component';
+import { EditCommentComponnet } from './component/comment/edit-component';
+import { DateAgoPipe } from './pipes/date-ago.pipe';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -38,7 +48,15 @@ import { GlobalErrorHandlerService } from './service/GlobalErrorHandlerService.s
     IdentifyUserComponent,
     UserListComponent,
     ResetPasswordComponent,
-    ForgetPasswordComponent
+    ForgetPasswordComponent,
+    PostComponent,
+    LeftNavComponent,
+    UserProfileComponent,
+    AddPostComponent,
+    AddCommentComponent,
+    CommentComponent,
+    EditCommentComponnet,
+    DateAgoPipe
   ],
   imports: [
     BrowserModule,
@@ -53,6 +71,8 @@ import { GlobalErrorHandlerService } from './service/GlobalErrorHandlerService.s
     HttpClientModule,
     MatProgressBarModule,
     MatSlideToggleModule,
+    MatMenuModule,
+    MatDialogModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptorService, multi: true },

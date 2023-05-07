@@ -14,10 +14,12 @@
                     <tr>
                       <th>First Name</th>
                       <th>Last Name</th>
+                      <th>Profile</th>
                     </tr>
                     <tr *ngFor="let user of users">
                       <td>{{user.firstName}}</td>
                       <td>{{user.lastName}}</td>
+                      <td><a style="color: blueviolet; cursor: pointer;" (click)="showUserProfile(user.userId)">Link</a></td>
                     </tr>
                   </table>
                 </div>

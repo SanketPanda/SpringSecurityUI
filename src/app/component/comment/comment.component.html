@@ -1,0 +1,22 @@
+<mat-card-content *ngFor="let comment of comments" style="margin-bottom: 1rem !important;">
+  <div class="comment-detail">
+    <img *ngIf="comment.usersDTO.firstName == 'Sanket'" src="../../../assets/Sanket.png" alt="sanket_panda">
+    <img *ngIf="comment.usersDTO.firstName != 'Sanket'"src="../../../assets/default_prfile_pic.png" alt="default_profile_pic">
+    <div class="row commented-user">
+      <div class="col-10">
+        <a style="color: blueviolet; cursor: pointer;" (click)="showUserProfile(comment.usersDTO.userId)">{{comment.usersDTO.firstName}} {{comment.usersDTO.lastName}}</a>
+        <p class="time-ago">{{comment.modDate | dateAgo}}</p>
+        <p>{{comment.commentDescription}}</p>
+      </div>
+      <div class="col-2" style="display: flex; justify-content: center;">
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_verti</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="editComment(comment)">Edit</button>
+          <button mat-menu-item (click)="deleteComment(comment)">Delete</button>
+      </mat-menu>
+      </div>
+    </div>
+  </div>
+</mat-card-content>

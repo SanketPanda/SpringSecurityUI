@@ -1,6 +1,6 @@
 export const environment = {
     production: true,
-    baseUrl: 'http://spring-security-api-prod.eba-ismfpaip.ap-south-1.elasticbeanstalk.com/api',
+    baseUrlProd: 'http://spring-security-api-prod.eba-ismfpaip.ap-south-1.elasticbeanstalk.com/api',
     baseUrlDev: 'http://localhost:5000/api',
     signUp: '/auth/register',
     confirmAccount: '/auth/confirm-account',
@@ -10,5 +10,14 @@ export const environment = {
     forgetPasswordToken: '/auth/forget-password',
     forgetPassword: '/auth/forget-password/token',
     login: '/auth/login',
-    users: '/user'
+    users: '/user',
+    getUser: '/user/',
+    getUserById: '/user/userId/',
+    getUserByEmail: '/user/email/',
+    createPost: '/post/create',
+    getPostOfUser: '/post/user/userId/',
+    getAllPost: '/post/all',
+    addComment: '/comment/create',
+    updateComment: '/comment/update',
+    deleteComment: '/comment/delete'
 }

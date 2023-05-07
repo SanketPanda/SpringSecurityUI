@@ -1,0 +1,19 @@
+<mat-card-content>
+  <div class="add-comment-detail">
+    <form [formGroup]="commentForm">
+      <input type="text" name="commentId" id="commentId" class="form-control" formControlName="commentId" ngDefaultControl
+        hidden>
+      <textarea type="text" placeholder="Enter comment" name="comment" id="comment" class="form-control pl-2" required
+      formControlName="commentDescription" ngDefaultControl style="height: 6rem;"></textarea>
+      <div class="row">
+        <div class="col">
+          <button mat-raised-button color="accent" style="height: 2rem; width: 100%;" class="mt-3"
+            (click)="onCancel()">Cancel</button>
+        </div>
+        <div class="col">
+          <button mat-raised-button color="primary" style="height: 2rem; width: 100%;" class="mt-3" (click)="onCommentUpdate()">Update</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</mat-card-content>

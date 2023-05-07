@@ -1,0 +1,15 @@
+<mat-card class="mb-5">
+  <mat-card-header style="display: block;">
+    <mat-card-title class="card-heading">
+      <div class="add-post-container">
+        <form  [formGroup]="postForm" (ngSubmit)="onFormSubmit()">
+        <!-- <input type="text" name="userId" id="userId" class="form-control" formControlName="userId"
+        ngDefaultControl hidden> -->
+        <textarea cols="100" rows="15" type="text" placeholder="What's on your mind?" name="postDescription" id="postDescription" class="form-control"
+        formControlName="postDescription" required ngDefaultControl></textarea>
+        <button mat-raised-button color="primary" class="post-btn">Post</button>
+      </form>
+      </div>
+    </mat-card-title>
+  </mat-card-header>
+</mat-card>
